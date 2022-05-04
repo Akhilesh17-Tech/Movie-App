@@ -46,7 +46,6 @@
 }
 
 // navigation bar end-----
-
 // container for content start -------
 
 .main .tabs {
@@ -55,6 +54,7 @@
   //   justify-content: space-between;
   //   border: 1px solid red;
   margin-left: 15%;
+  cursor: pointer;
 }
 
 .main .tabs .tab {
@@ -103,7 +103,7 @@
   margin: auto;
   display: flex;
   align-items: center;
-  transform: translate(0, 25vh);
+  transform: translate(0, 100px);
   justify-content: space-between;
 }
 
@@ -112,11 +112,34 @@
   font-weight: 800;
 }
 
-.footer .favourite-btn {
+.footer .favorite-btn {
   font-size: 20px;
   font-weight: 600;
   background-color: rgb(106, 235, 228);
   padding: 10px;
   border: none;
   border-radius: 5px;
+}
+
+/* For 480 Resolution */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  /* STYLES GO HERE */
+
+  .nav .search-container {
+    width: 100%;
+    border: 1px solid transparent;
+  }
+  .nav input {
+    width: 75%;
+    border: none;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 5px 0 0 5px;
+  }
+  .nav button {
+    width: 25%;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px;
+  }
 }
