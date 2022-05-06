@@ -59,9 +59,9 @@
 
 .main .tabs .tab {
   margin: 5px;
-  border: 1px solid transparent;
+  border: 1px solid grey;
   border-radius: 5px;
-  background-color: lightgray;
+  // background-color: lightgray;
   padding: 10px;
 }
 
@@ -103,8 +103,9 @@
   margin: auto;
   display: flex;
   align-items: center;
-  transform: translate(0, 100px);
   justify-content: space-between;
+  // border: 1px solid red;
+  margin-top: 100px;
 }
 
 .footer .rating {
@@ -118,7 +119,23 @@
   background-color: rgb(106, 235, 228);
   padding: 10px;
   border: none;
+
   border-radius: 5px;
+}
+
+.footer .unfavorite-btn {
+  font-size: 20px;
+  font-weight: 600;
+  background-color: rgb(235, 106, 106);
+  padding: 10px;
+  border: none;
+
+  border-radius: 5px;
+}
+
+.active-tab {
+  font-weight: 900;
+  background-color: rgb(36, 122, 118);
 }
 
 /* For 480 Resolution */
