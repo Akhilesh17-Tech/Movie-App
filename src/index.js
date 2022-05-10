@@ -3,9 +3,19 @@ import ReactDOM from "react-dom/client";
 import { createStore } from "redux";
 import "./index.css";
 import App from "./components/App";
-import movies from "./reducers";
+// import rootReducer from "./reducers";
+import rootReducer from "./reducers/index";
 
-const store = createStore(movies);
+// currying
+const logger = function ({ dispatch, getState }) {
+  return function (next) {
+    return function (action) {
+      // middleware code
+    };
+  };
+};
+
+const store = createStore(rootReducer);
 
 console.log("s", store);
 // console.log("old state", store.getState());
