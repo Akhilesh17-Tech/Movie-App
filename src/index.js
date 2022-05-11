@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from "react";
 import ReactDOM from "react-dom/client";
 import { createStore, applyMiddleware } from "redux";
 import "./index.css";
@@ -49,9 +49,23 @@ console.log("s", store);
 //   movies: [{ Name: "SuperMan" }],
 // });
 
+export const StoreContext = createContext();
+console.log("StoreContext", StoreContext);
+
+// we can create a class for contextStore
+
+class Provider extends React.Component {
+  render() {
+    const { store } = this.props;
+    return <StoreContext value={store}>{this.props.children}</StoreContext>;
+  }
+}
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App store={store} />
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>
 );

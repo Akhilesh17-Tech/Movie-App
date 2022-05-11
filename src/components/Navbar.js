@@ -1,21 +1,19 @@
 import React from "react";
 import "../components/scss/Style.scss";
-
-import { data } from "../data";
+// import { data } from "../data";
 import { addMoviesToList, handleMovieSearch } from "../actions";
 
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showSearchResults: true,
+      showSearchResults: false,
     };
-  } 
+  }
 
   handleAddToMovies = (movie) => {
     this.props.dispatch(addMoviesToList(movie));
     this.setState({
-      showSearchResult: false,
       searchText: "",
     });
   };
@@ -32,7 +30,7 @@ class Navbar extends React.Component {
   };
 
   render() {
-    const { showSearchResults } = this.state;
+    const { result: movie, showSearchResult } = this.props.search;
     return (
       <div className="nav">
         <div className="search-container">
@@ -40,14 +38,14 @@ class Navbar extends React.Component {
           <button id="search-btn" onClick={this.handleSearch}>
             Search
           </button>
-          {showSearchResults && (
+          {showSearchResult && (
             <div className="search-results">
               <div className="search-result">
-                <img src={data[0].Poster} alt="search-pic" />
+                <img src={movie.Poster} alt="search-pic" />
 
                 <div className="more-info">
-                  <span>{data[0].Title}</span>
-                  <button onClick={() => this.handleAddToMovies(data[0])}>
+                  <span>{movie.Title}</span>
+                  <button onClick={() => this.handleAddToMovies(movie)}>
                     Add to movies
                   </button>
                 </div>
