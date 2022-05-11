@@ -52,12 +52,14 @@ console.log("s", store);
 export const StoreContext = createContext();
 console.log("StoreContext", StoreContext);
 
-// we can create a class for contextStore
-
 class Provider extends React.Component {
   render() {
     const { store } = this.props;
-    return <StoreContext value={store}>{this.props.children}</StoreContext>;
+    return (
+      <StoreContext.Provider value={store}>
+        {this.props.children}
+      </StoreContext.Provider>
+    );
   }
 }
 

@@ -9,7 +9,6 @@ import { StoreContext } from "../index";
 class App extends React.Component {
   componentDidMount() {
     const { store } = this.props;
-
     store.subscribe(() => {
       console.log("UPDATED");
       this.forceUpdate();
@@ -39,49 +38,53 @@ class App extends React.Component {
     const { list, favorites, showFavorites } = movies;
     console.log("RENDER", this.props.store.getState());
     const displayMovie = showFavorites ? favorites : list;
+    return (
+      <div className="App">
+        <Navbar search={search} />
+        <div className="main">
+          <div className="tabs">
+            <div
+              className={`tab ${showFavorites ? "" : "active-tab"}`}
+              onClick={() => this.onChangeTab(false)}
+            >
+              Movies
+            </div>
+            <div
+              className={`tab ${showFavorites ? "active-tab" : ""}`}
+              onClick={() => this.onChangeTab(true)}
+            >
+              Favorites
+            </div>
+          </div>
+          <div className="list">
+            {displayMovie.map((movie, index) => (
+              <MovieCard
+                movie={movie}
+                key={`movies-${index}`}
+                dispatch={this.props.store.dispatch}
+                isFavorite={this.isMovieFavorite(movie)}
+              />
+            ))}
+          </div>
+          {displayMovie.length === 0 ? (
+            <div className="no-movies"> No movies to Display!</div>
+          ) : null}
+        </div>
+      </div>
+    );
+  }
+}
 
+class AppWrapper extends React.Component {
+  render() {
     return (
       <StoreContext.Consumer>
         {(store) => {
-          return (
-            <div className="App">
-              <Navbar dispatch={store.dispatch} search={search} />
-              <div className="main">
-                <div className="tabs">
-                  <div
-                    className={`tab ${showFavorites ? "" : "active-tab"}`}
-                    onClick={() => this.onChangeTab(false)}
-                  >
-                    Movies
-                  </div>
-                  <div
-                    className={`tab ${showFavorites ? "active-tab" : ""}`}
-                    onClick={() => this.onChangeTab(true)}
-                  >
-                    Favorites
-                  </div>
-                </div>
-
-                <div className="list">
-                  {displayMovie.map((movie, index) => (
-                    <MovieCard
-                      movie={movie}
-                      key={`movies-${index}`}
-                      dispatch={store.dispatch}
-                      isFavorite={this.isMovieFavorite(movie)}
-                    />
-                  ))}
-                </div>
-                {displayMovie.length === 0 ? (
-                  <div className="no-movies"> No movies to Display!</div>
-                ) : null}
-              </div>
-            </div>
-          );
+          return <App store={store} />;
         }}
       </StoreContext.Consumer>
     );
   }
 }
 
-export default App;
+export default AppWrapper;
