@@ -44,7 +44,7 @@ class Navbar extends React.Component {
               <div className="search-result">
                 <img src={movie.Poster} alt="search-pic" />
 
-                <div className="more-info">
+                <div className="movie-info">
                   <span>{movie.Title}</span>
                   <button onClick={() => this.handleAddToMovies(movie)}>
                     Add to movies
